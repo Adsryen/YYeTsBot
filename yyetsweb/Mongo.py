@@ -125,6 +125,7 @@ class CommentMongoResource(CommentResource, Mongo):
         for item in parent_data:
             children_ids = item.get("children", [])
             condition = {"_id": {"$in": children_ids}, "deleted_at": {"$exists": False}, "type": "child"}
+            children_count = self.db["comment"].count_documents(condition)
             children_data = self.db["comment"].find(condition, self.projection) \
                 .sort("_id", pymongo.DESCENDING).limit(self.inner_size).skip((self.inner_page - 1) * self.inner_size)
             children_data = list(children_data)
@@ -132,6 +133,7 @@ class CommentMongoResource(CommentResource, Mongo):
             if children_data:
                 item["children"] = []
                 item["children"].extend(children_data)
+                item["childrenCount"] = children_count
 
     def get_user_group(self, data):
         for comment in data:
