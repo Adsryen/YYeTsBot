@@ -10,14 +10,12 @@
 
 # 导入数据
 
-## 方法1: 自己迁移数据
+从 [这里](https://yyets.click/database) 下载mongodb数据，然后导入
 
-1. 下载[MySQL的数据](https://t.me/mikuri520/668)
-1. 导入数据到MySQL
-2. 运行 `python prepare/convert_db.py`
+```shell
+mongorestore --gzip --archive=yyets_mongo.gz --nsFrom "share.*" --nsTo "zimuzu.*"
+```
 
-## 方法2:使用我的导出
-参考 [这里](https://yyets.dmesg.app/help.html)
 # 运行
 
 `python server.py`
@@ -32,10 +30,30 @@
 use zimuzu;
 
 db.getCollection('yyets').createIndex({"data.info.id": 1});
-
 db.getCollection('yyets').createIndex({"data.info.views" : -1});
-
 db.getCollection('yyets').createIndex({"data.info.area" : 1});
-
 db.getCollection('yyets').getIndexes();
+
+db.getCollection('douban').createIndex({"resourceId" : 1});
+db.getCollection('douban').getIndexes();
+
+db.getCollection('users').createIndex({"username" : 1}, { unique: true });
+db.getCollection('users').createIndex(
+   { "email.address": 1 },
+   { unique: true, partialFilterExpression: { "email.address": { $exists: true } } }
+)
+db.getCollection('users').getIndexes();
+
+db.getCollection('comment').createIndex({"resource_id" : 1});
+db.getCollection('comment').getIndexes();
+
+db.getCollection('reactions').createIndex({"comment_id" : 1});
+db.getCollection('reactions').getIndexes();
+
+db.getCollection('metrics').createIndex({"date" : 1});
+db.getCollection('metrics').getIndexes();
+
+db.getCollection('notification').createIndex({"username" : 1});
+db.getCollection('notification').getIndexes();
+
 ```

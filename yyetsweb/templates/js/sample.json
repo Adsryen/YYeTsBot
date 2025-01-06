@@ -1,0 +1,937 @@
+{
+  "status": 1,
+  "info": "OK",
+  "data": {
+    "info": {
+      "id": 34812,
+      "cnname": "逃避可耻却有用",
+      "enname": "NIGERUHA HAJIDAGA YAKUNITATSU",
+      "aliasname": "逃避虽可耻但有用 / 雇佣妻子(港) / 月薪娇妻(台) / 逃跑是可耻但是有用 / 逃避虽可耻但很有用 / 逃避可耻但有用",
+      "channel": "tv",
+      "channel_cn": "日剧",
+      "area": "日本",
+      "show_type": "",
+      "expire": "1610399344",
+      "views": 1200,
+      "year": [
+        2016,
+        2017,
+        2021
+      ]
+    },
+    "list": [
+      {
+        "season_num": "101",
+        "season_cn": "单剧",
+        "items": {
+          "APP": [
+            {
+              "itemid": "554385",
+              "episode": "12",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1609622857",
+              "files": [
+                {
+                  "way": "102",
+                  "way_cn": "百度云",
+                  "address": "https://exmaple.com",
+                  "passwd": "x28a"
+                },
+                {
+                  "way": "115",
+                  "way_cn": "微云",
+                  "address": "https://exmaple.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "298235",
+              "episode": "11",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298234",
+              "episode": "10",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298233",
+              "episode": "9",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298232",
+              "episode": "8",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298231",
+              "episode": "7",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298230",
+              "episode": "6",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298229",
+              "episode": "5",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298228",
+              "episode": "4",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298227",
+              "episode": "3",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298226",
+              "episode": "2",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            },
+            {
+              "itemid": "298225",
+              "episode": "1",
+              "name": "yyets://N.fake",
+              "size": "",
+              "yyets_trans": 0,
+              "dateline": "1491891741",
+              "files": null
+            }
+          ],
+          "HR-HDTV": [
+            {
+              "itemid": "554384",
+              "episode": "12",
+              "name": "逃避可耻却有用 人类加油！新春特别篇！！.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ganbare.Jinrui.Shinshun.Special.SP.Chi_Jap.HDTVrip.1280X720.mp4",
+              "size": "1.4GB",
+              "yyets_trans": 0,
+              "dateline": "1609622857",
+              "files": [
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "https://exmaple.com",
+                  "passwd": "x28a"
+                }
+              ]
+            },
+            {
+              "itemid": "284973",
+              "episode": "11",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep11.Final.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "699.79MB",
+              "yyets_trans": 0,
+              "dateline": "1482282868",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "284430",
+              "episode": "10",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep10.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "699.93MB",
+              "yyets_trans": 0,
+              "dateline": "1481704074",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "283661",
+              "episode": "9",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep09.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "599.99MB",
+              "yyets_trans": 0,
+              "dateline": "1481098725",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "282897",
+              "episode": "8",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep08.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "600.06MB",
+              "yyets_trans": 0,
+              "dateline": "1480497463",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "282123",
+              "episode": "7",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep07.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "599.98MB",
+              "yyets_trans": 0,
+              "dateline": "1479886413",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "281371",
+              "episode": "6",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep06.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "600.09MB",
+              "yyets_trans": 0,
+              "dateline": "1479281049",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "280656",
+              "episode": "5",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep05.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "600.11MB",
+              "yyets_trans": 0,
+              "dateline": "1478670362",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "280068",
+              "episode": "4",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep04.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "599.9MB",
+              "yyets_trans": 0,
+              "dateline": "1478065113",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "279384",
+              "episode": "3",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep03.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "599.3MB",
+              "yyets_trans": 0,
+              "dateline": "1477483732",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "278649",
+              "episode": "2",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep02.Chi_Jap.HDTVrip.1280X720-ZhuixinFan.mp4",
+              "size": "599.94MB",
+              "yyets_trans": 0,
+              "dateline": "1476868310",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "277958",
+              "episode": "1",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep01.Chi_Jap.HDTVrip.1280X720-ZhuixinFanV2.mp4",
+              "size": "699.97MB",
+              "yyets_trans": 0,
+              "dateline": "1476238571",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            }
+          ],
+          "MP4": [
+            {
+              "itemid": "554387",
+              "episode": "12",
+              "name": "逃避可耻却有用 人类加油！新春特别篇！！.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ganbare.Jinrui.Shinshun.Special.SP.Chi_Jap.HDTVrip.1280X720.mp4",
+              "size": "1.4GB",
+              "yyets_trans": 0,
+              "dateline": "1609622857",
+              "files": [
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "284971",
+              "episode": "11",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep11.Final.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "273.97MB",
+              "yyets_trans": 0,
+              "dateline": "1482265302",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "284424",
+              "episode": "10",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep10.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "250.46MB",
+              "yyets_trans": 0,
+              "dateline": "1481694187",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "283576",
+              "episode": "9",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep09.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "197.99MB",
+              "yyets_trans": 0,
+              "dateline": "1481091708",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "282890",
+              "episode": "8",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep08.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "193.81MB",
+              "yyets_trans": 0,
+              "dateline": "1480490078",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "282120",
+              "episode": "7",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep07.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "205.1MB",
+              "yyets_trans": 0,
+              "dateline": "1479881031",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "281368",
+              "episode": "6",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep06.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "225.23MB",
+              "yyets_trans": 0,
+              "dateline": "1479275434",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "280651",
+              "episode": "5",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep05.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "214.19MB",
+              "yyets_trans": 0,
+              "dateline": "1478665773",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "280038",
+              "episode": "4",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep04.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "191.02MB",
+              "yyets_trans": 0,
+              "dateline": "1478060356",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "279352",
+              "episode": "3",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep03.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "230.2MB",
+              "yyets_trans": 0,
+              "dateline": "1477463950",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "278647",
+              "episode": "2",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep02.Chi_Jap.HDTVrip.852X480-ZhuixinFan.mp4",
+              "size": "200.22MB",
+              "yyets_trans": 0,
+              "dateline": "1476861702",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            },
+            {
+              "itemid": "277951",
+              "episode": "1",
+              "name": "逃避可耻却有用.NIGERUHA.HAJIDAGA.YAKUNITATSU.Ep01.Chi_Jap.HDTVrip.852X480-ZhuixinFanV2.mp4",
+              "size": "304.92MB",
+              "yyets_trans": 0,
+              "dateline": "1476216447",
+              "files": [
+                {
+                  "way": "1",
+                  "way_cn": "电驴",
+                  "address": "ed2k://|file|a",
+                  "passwd": ""
+                },
+                {
+                  "way": "2",
+                  "way_cn": "磁力",
+                  "address": "magnet:?xt=urn",
+                  "passwd": ""
+                },
+                {
+                  "way": "9",
+                  "way_cn": "网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                },
+                {
+                  "way": "12",
+                  "way_cn": "诚通网盘",
+                  "address": "http://abc.com",
+                  "passwd": ""
+                }
+              ]
+            }
+          ]
+        },
+        "formats": [
+          "HR-HDTV",
+          "MP4",
+          "APP"
+        ]
+      }
+    ]
+  }
+}

@@ -2,58 +2,65 @@ version: '3.1'
 
 services:
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
     restart: always
     logging:
       driver: none
 
   mongo:
-    image: mongo
+    image: mongo:6
     restart: always
     volumes:
       - ./mongo_data/mongodb:/data/db
+    command: --quiet
     logging:
       driver: none
+    ports:
+      - "127.0.0.1:27017:27017"
 
-  socat:
-    image: alpine/socat
+  meili:
+    image: getmeili/meilisearch:v1.0.2
     restart: always
+    environment:
+      - MEILI_HTTP_PAYLOAD_SIZE_LIMIT=1073741824 #1GiB
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    entrypoint: [ "socat", "tcp-listen:2375,fork,reuseaddr","unix-connect:/var/run/docker.sock" ]
+      - meilisearch_data:/meili_data
 
-  yyets-web:
-    image: bennythink/yyetsbot
+  mysql:
+    image: ubuntu/mysql:8.0-22.04_beta
     restart: unless-stopped
     environment:
-      - mongo=mongo
-    working_dir: /YYeTsBot/yyetsweb/
-    volumes:
-      - ./data:/YYeTsBot/yyetsweb/data/
-    command: [ "python3","server.py","-h=0.0.0.0" ]
-    ports:
-      - 127.0.0.1:8888:8888
+      MYSQL_ROOT_PASSWORD: 'root'
+    logging:
+      driver: none
+    command: "--skip-log-bin --default-authentication-plugin=mysql_native_password"
 
-  yyets-bot:
+  bot:
     image: bennythink/yyetsbot
     depends_on:
       - redis
-      - socat
       - mongo
-    restart: on-failure
+    restart: always
     env_file:
       - env/yyets.env
 
-  nginx:
+  web:
+    image: bennythink/yyetsbot
     restart: always
-    image: nginx:alpine
+    env_file:
+      - env/yyets.env
+    depends_on:
+      - mongo
+      - redis
+      - mysql
+    working_dir: /YYeTsBot/yyetsweb/
     volumes:
-      - ./conf:/etc/nginx/conf.d
-      - /home/photos:/usr/share/nginx/html/photos
-      - ./certs/:/etc/nginx/certs/
-      - ./logs:/var/log/nginx/
+      - ./subtitle_data:/YYeTsBot/yyetsweb/subtitle_data
+    command: [ "python3","server.py","-h=0.0.0.0" ]
     ports:
-      - 80:80
-      - 443:443
-    environment:
-      TZ: Asia/Shanghai
+      - "127.0.0.1:8888:8888"
+      - "172.17.0.1:8888:8888"
+
+
+volumes:
+  meilisearch_data:

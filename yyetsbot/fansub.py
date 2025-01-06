@@ -2,31 +2,43 @@
 # YYeTsBot - fansub.py
 # 2019/8/15 18:30
 
-__author__ = 'Benny <benny.think@gmail.com>'
+__author__ = "Benny <benny.think@gmail.com>"
 
-import os
-import logging
-import pickle
-import sys
-import json
-import hashlib
 import contextlib
+import hashlib
+import json
+import logging
+import os
+import pickle
 import re
+import sys
 
-import requests
+import fakeredis
 import pymongo
 import redis
-import fakeredis
+import requests
 from bs4 import BeautifulSoup
+from bson.objectid import ObjectId
 
-from config import (WORKERS, REDIS, FANSUB_ORDER, FIX_SEARCH, MONGO,
-                    ZHUIXINFAN_SEARCH, ZHUIXINFAN_RESOURCE, NEWZMZ_SEARCH, NEWZMZ_RESOURCE,
-                    CK180_SEARCH)
+from config import (
+    BD2020_SEARCH,
+    FANSUB_ORDER,
+    FIX_SEARCH,
+    MONGO,
+    NEWZMZ_RESOURCE,
+    NEWZMZ_SEARCH,
+    REDIS,
+    WORKERS,
+    DISCUSS,
+    XL720_SEARCH,
+    ZHUIXINFAN_RESOURCE,
+    ZHUIXINFAN_SEARCH,
+)
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(filename)s [%(levelname)s]: %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(filename)s [%(levelname)s]: %(message)s")
 
 session = requests.Session()
-ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"
 session.headers.update({"User-Agent": ua})
 
 this_module = sys.modules[__name__]
@@ -43,16 +55,16 @@ class Redis:
         self.r.close()
 
     @classmethod
-    def preview_cache(cls, timeout):
+    def preview_cache(cls, timeout=3600 * 24):
         def func(fun):
             def inner(*args, **kwargs):
                 search_text = args[1]
                 cache_value = cls().r.get(search_text)
                 if cache_value:
-                    logging.info('🎉 Preview cache hit for %s %s', fun, search_text)
+                    logging.info("🎉 Preview cache hit for %s %s", fun, search_text)
                     return json.loads(cache_value)
                 else:
-                    logging.info('😱 Preview cache expired. Running %s %s', fun, search_text)
+                    logging.info("😱 Preview cache expired. Running %s %s", fun, search_text)
                     res = fun(*args, **kwargs)
                     # if res len is 1, then it means we have no search result at all.
                     if len(res) != 1:
@@ -71,14 +83,14 @@ class Redis:
         return func
 
     @classmethod
-    def result_cache(cls, timeout):
+    def result_cache(cls, timeout=3600 * 24):
         def func(fun):
             def inner(*args, **kwargs):
                 # this method will convert hash to url
                 url_or_hash = args[1]
                 if re.findall(r"http[s]?://", url_or_hash):
                     # means this is a url
-                    url_hash = hashlib.sha1(url_or_hash.encode('u8')).hexdigest()
+                    url_hash = hashlib.sha1(url_or_hash.encode("u8")).hexdigest()
                     cls().r.hset(url_hash, mapping={"url": url_or_hash})
                 else:
                     # this is cache, retrieve real url from redis
@@ -90,10 +102,10 @@ class Redis:
                 del url_or_hash
                 cache_value = cls().r.hgetall(url)
                 if cache_value:
-                    logging.info('🎉 Result cache hit for %s %s', fun, url)
+                    logging.info("🎉 Result cache hit for %s %s", fun, url)
                     return cache_value
                 else:
-                    logging.info('😱 Result cache expired. Running %s %s', fun, url)
+                    logging.info("😱 Result cache expired. Running %s %s", fun, url)
                     new_args = (args[0], url)
                     res = fun(*new_args, **kwargs)
                     # we must have an result for it,
@@ -115,6 +127,7 @@ class BaseFansub:
     3. search_result as this is critical for bot to draw markup
 
     """
+
     cookie_file = None
 
     def __init__(self):
@@ -127,11 +140,11 @@ class BaseFansub:
 
     def get_html(self, link: str, encoding=None) -> str:
         # return html text of search page
-        logging.info("[%s] Searching  for %s", self.__class__.__name__, link)
         with session.get(link) as r:
             if encoding is not None:
                 r.encoding = encoding
             html = r.text
+        logging.info("[%s] [%s] Searching  for %s", self.__class__.__name__, r.status_code, link)
         return html
 
     def search_preview(self, search_text: str) -> dict:
@@ -159,106 +172,125 @@ class BaseFansub:
         pass
 
     def __save_cookies__(self, requests_cookiejar):
-        with open(self.cookie_file, 'wb') as f:
+        with open(self.cookie_file, "wb") as f:
             pickle.dump(requests_cookiejar, f)
 
     def __load_cookies__(self):
-        with open(self.cookie_file, 'rb') as f:
+        with open(self.cookie_file, "rb") as f:
             return pickle.load(f)
 
 
 class YYeTsOffline(BaseFansub):
-
     def __init__(self, db="zimuzu", col="yyets"):
         super().__init__()
         self.mongo = pymongo.MongoClient(host=MONGO)
-        self.collection = self.mongo[db][col]
+        self.db = self.mongo[db]
+        self.collection = self.db[col]
 
-    @Redis.preview_cache(3600)
+    @Redis.preview_cache(60)
     def search_preview(self, search_text: str) -> dict:
         logging.info("[%s] Loading offline data from MongoDB...", self.__class__.__name__)
 
-        projection = {'_id': False, 'data.info': True}
-        data = self.collection.find({
-            "$or": [
-                {"data.info.cnname": {"$regex": f".*{search_text}.*", "$options": "-i"}},
-                {"data.info.enname": {"$regex": f".*{search_text}.*", "$options": "-i"}},
-                {"data.info.aliasname": {"$regex": f".*{search_text}.*", "$options": "-i"}},
-            ]},
-            projection
+        projection = {"_id": False, "data.info": True}
+        data = self.collection.find(
+            {
+                "$or": [
+                    {"data.info.cnname": {"$regex": f".*{search_text}.*", "$options": "i"}},
+                    {"data.info.enname": {"$regex": f".*{search_text}.*", "$options": "i"}},
+                    {"data.info.aliasname": {"$regex": f".*{search_text}.*", "$options": "i"}},
+                ]
+            },
+            projection,
         )
         results = {}
         for item in data:
             info = item["data"]["info"]
-            url = "https://yyets.dmesg.app/resource.html?id={}".format(info["id"])
-            url_hash = hashlib.sha1(url.encode('u8')).hexdigest()
+            url = WORKERS.format(info["id"])
+            url_hash = hashlib.sha1(url.encode("u8")).hexdigest()
             all_name = info["cnname"] + info["enname"] + info["aliasname"]
-            results[url_hash] = {
-                "name": all_name,
-                "url": url,
-                "class": self.__class__.__name__
-            }
+            results[url_hash] = {"name": all_name, "url": url, "class": self.__class__.__name__}
 
-        logging.info("[%s] Offline search complete", self.__class__.__name__)
+        logging.info("[%s] Offline resource search complete", self.__class__.__name__)
+
+        comments = self.db["comment"].find({"content": {"$regex": f".*{search_text}.*", "$options": "i"}})
+        for c in comments:
+            if c["resource_id"] == 233:
+                url = DISCUSS.format(str(c["_id"]))
+            else:
+                url = WORKERS + "#{}".format(c["resource_id"], str(c["_id"]))
+            url_hash = hashlib.sha1(url.encode("u8")).hexdigest()
+            all_name = c["content"]
+            results[url_hash] = {"name": all_name, "url": url, "class": self.__class__.__name__}
+        logging.info("[%s] Offline comment search complete", self.__class__.__name__)
+
         results["class"] = self.__class__.__name__
         return results
 
-    @Redis.result_cache(1800)
+    @Redis.result_cache(10 * 60)
     def search_result(self, resource_url) -> dict:
         # yyets offline
-        # https://yyets.dmesg.app/resource.html?id=37089
-        rid = resource_url.split("id=")[1]
-        data: dict = self.collection.find_one({"data.info.id": int(rid)}, {'_id': False})
-        name = data["data"]["info"]["cnname"]
-        return {"all": json.dumps(data, ensure_ascii=False), "share": WORKERS.format(id=rid), "cnname": name}
+
+        # resource: https://yyets.click/resource.html?id=37089
+        # comment: 'https://yyets.click/resource.html?id=233#61893ae51e9152e43fa24124'
+        if "#" in resource_url:
+            cid = resource_url.split("#")[1]
+            data: dict = self.db["comment"].find_one(
+                {"_id": ObjectId(cid)}, {"_id": False, "ip": False, "type": False, "children": False, "browser": False}
+            )
+            share = resource_url
+            name = f"{data['username']} 的分享"
+            t = "comment"
+        else:
+            rid = resource_url.split("id=")[1]
+            data: dict = self.collection.find_one({"data.info.id": int(rid)}, {"_id": False})
+            name = data["data"]["info"]["cnname"]
+            share = WORKERS.format(rid)
+            t = "resource"
+
+        return {"all": json.dumps(data, ensure_ascii=False, indent=4), "share": share, "cnname": name, "type": t}
 
     def __del__(self):
         self.mongo.close()
 
 
 class ZimuxiaOnline(BaseFansub):
-    @Redis.preview_cache(3600)
+    @Redis.preview_cache()
     def search_preview(self, search_text: str) -> dict:
         # zimuxia online
         search_url = FIX_SEARCH.format(kw=search_text)
         html_text = self.get_html(search_url)
-        logging.info('[%s] Parsing html...', self.__class__.__name__)
-        soup = BeautifulSoup(html_text, 'html.parser')
+        logging.info("[%s] Parsing html...", self.__class__.__name__)
+        soup = BeautifulSoup(html_text, "html.parser")
         link_list = soup.find_all("h2", class_="post-title")
 
         dict_result = {}
         for link in link_list:
             # TODO wordpress search content and title, some cases it would be troublesome
-            url = link.a['href']
-            url_hash = hashlib.sha1(url.encode('u8')).hexdigest()
+            url = link.a["href"]
+            url_hash = hashlib.sha1(url.encode("u8")).hexdigest()
             name = link.a.text
-            dict_result[url_hash] = {
-                "url": url,
-                "name": name,
-                "class": self.__class__.__name__
-            }
+            dict_result[url_hash] = {"url": url, "name": name, "class": self.__class__.__name__}
         dict_result["class"] = self.__class__.__name__
         return dict_result
 
-    @Redis.result_cache(1800)
+    @Redis.result_cache()
     def search_result(self, resource_url: str) -> dict:
         # zimuxia online
         logging.info("[%s] Loading detail page %s", self.__class__.__name__, resource_url)
         html = self.get_html(resource_url)
-        soup = BeautifulSoup(html, 'html.parser')
+        soup = BeautifulSoup(html, "html.parser")
         cnname = soup.title.text.split("|")[0]
-        return {"all": html, "share": resource_url, "cnname": cnname}
+        return {"all": html, "share": resource_url, "cnname": cnname, "type": "resource"}
 
 
 class ZhuixinfanOnline(BaseFansub):
-
-    @Redis.preview_cache(3600)
+    @Redis.preview_cache()
     def search_preview(self, search_text: str) -> dict:
         # zhuixinfan online
         search_link = ZHUIXINFAN_SEARCH.format(search_text)
         html_text = self.get_html(search_link)
-        logging.info('[%s] Parsing html...', self.__class__.__name__)
-        soup = BeautifulSoup(html_text, 'html.parser')
+        logging.info("[%s] Parsing html...", self.__class__.__name__)
+        soup = BeautifulSoup(html_text, "html.parser")
         link_list = soup.find_all("ul", class_="resource_list")
 
         dict_result = {}
@@ -267,30 +299,25 @@ class ZhuixinfanOnline(BaseFansub):
                 with contextlib.suppress(AttributeError):
                     name = link.dd.text
                     url = ZHUIXINFAN_RESOURCE.format(link.dd.a["href"])
-                    url_hash = hashlib.sha1(url.encode('u8')).hexdigest()
-                    dict_result[url_hash] = {
-                        "url": url,
-                        "name": name,
-                        "class": self.__class__.__name__
-                    }
+                    url_hash = hashlib.sha1(url.encode("u8")).hexdigest()
+                    dict_result[url_hash] = {"url": url, "name": name, "class": self.__class__.__name__}
         dict_result["class"] = self.__class__.__name__
         return dict_result
 
-    @Redis.result_cache(1800)
+    @Redis.result_cache()
     def search_result(self, url: str) -> dict:
         # zhuixinfan online
         # don't worry, url_hash will become real url
         logging.info("[%s] Loading detail page %s", self.__class__.__name__, url)
         html = self.get_html(url, "utf-8")
         # 解析获得cnname等信息
-        soup = BeautifulSoup(html, 'html.parser')
+        soup = BeautifulSoup(html, "html.parser")
         cnname = soup.title.text.split("_")[0]
-        return {"all": html, "share": url, "cnname": cnname}
+        return {"all": html, "share": url, "cnname": cnname, "type": "resource"}
 
 
 class NewzmzOnline(BaseFansub):
-
-    @Redis.preview_cache(3600)
+    @Redis.preview_cache()
     def search_preview(self, search_text: str) -> dict:
         # zhuixinfan online
         search_link = NEWZMZ_SEARCH.format(search_text)
@@ -300,55 +327,71 @@ class NewzmzOnline(BaseFansub):
         dict_result = {}
         for item in search_response["data"]:
             url = NEWZMZ_RESOURCE.format(item["link_url"].split("-")[1])
-            url_hash = hashlib.sha1(url.encode('u8')).hexdigest()
+            url_hash = hashlib.sha1(url.encode("u8")).hexdigest()
             dict_result[url_hash] = {
                 "url": url,
                 "name": item["name"] + item["name_eng"],
-                "class": self.__class__.__name__
+                "class": self.__class__.__name__,
             }
         dict_result["class"] = self.__class__.__name__
         return dict_result
 
-    @Redis.result_cache(1800)
+    @Redis.result_cache()
     def search_result(self, url: str) -> dict:
         logging.info("[%s] Loading detail page %s", self.__class__.__name__, url)
         html = self.get_html(url)
         # 解析获得cnname等信息
-        soup = BeautifulSoup(html, 'html.parser')
+        soup = BeautifulSoup(html, "html.parser")
         cnname = soup.title.text.split("-")[0]
-        return {"all": html, "share": url, "cnname": cnname}
+        return {"all": html, "share": url, "cnname": cnname, "type": "resource"}
 
 
-class CK180Online(BaseFansub):
-
-    @Redis.preview_cache(3600)
+class BD2020(NewzmzOnline):
+    @Redis.preview_cache()
     def search_preview(self, search_text: str) -> dict:
-        search_link = CK180_SEARCH.format(search_text)
+        search_link = BD2020_SEARCH.format(search_text)
         html_text = self.get_html(search_link)
-        logging.info('[%s] Parsing html...', self.__class__.__name__)
-        soup = BeautifulSoup(html_text, 'html.parser')
-        link_list = soup.find_all("div", class_="post clearfix")
+        logging.info("[%s] Parsing html...", self.__class__.__name__)
+        soup = BeautifulSoup(html_text, "html.parser")
+        link_list = soup.find_all("li", class_="list-item")
+
         dict_result = {}
-        for div in link_list:
-            name = div.h3.text
-            url = div.h3.a["href"]
-            url_hash = hashlib.sha1(url.encode('u8')).hexdigest()
-            dict_result[url_hash] = {
-                "url": url,
-                "name": name,
-                "class": self.__class__.__name__
-            }
+        for item in link_list:
+            name = item.div.a.text.strip()
+            url = item.div.a["href"]
+            url_hash = hashlib.sha1(url.encode("u8")).hexdigest()
+            dict_result[url_hash] = {"url": url, "name": name, "class": self.__class__.__name__}
 
         dict_result["class"] = self.__class__.__name__
         return dict_result
 
-    @Redis.result_cache(1800)
+
+class XL720(BD2020):
+    @Redis.preview_cache()
+    def search_preview(self, search_text: str) -> dict:
+        search_link = XL720_SEARCH.format(search_text)
+        html_text = self.get_html(search_link)
+        logging.info("[%s] Parsing html...", self.__class__.__name__)
+        soup = BeautifulSoup(html_text, "html.parser")
+
+        dict_result = {}
+        link_list = soup.find_all("div", class_="post clearfix")
+        for item in link_list:
+            name = re.sub(r"\s", "", item.h3.a.text.strip())
+            url = item.h3.a["href"]
+            url_hash = hashlib.sha1(url.encode("u8")).hexdigest()
+            dict_result[url_hash] = {"url": url, "name": name, "class": self.__class__.__name__}
+
+        dict_result["class"] = self.__class__.__name__
+        return dict_result
+
+    @Redis.result_cache()
     def search_result(self, url: str) -> dict:
         logging.info("[%s] Loading detail page %s", self.__class__.__name__, url)
         html = self.get_html(url)
-        soup = BeautifulSoup(html, 'html.parser')
-        cnname = soup.title.text.split("_")[0]
-        return {"all": html, "share": url, "cnname": cnname}
+        soup = BeautifulSoup(html, "html.parser")
+        cnname = soup.title.text.split("迅雷下载")[0]
+        return {"all": html, "share": url, "cnname": cnname, "type": "resource"}
 
 
 class FansubEntrance(BaseFansub):
@@ -402,10 +445,10 @@ for sub_name in globals().copy():
         logging.info("Mapping %s to %s", cmd_name, m)
         vars()[cmd_name] = m
 
-if __name__ == '__main__':
-    sub = CK180Online()
-    # search = sub.search_preview("404")
-    # print(search)
-    uh = "965892b6b3ecd5635b7df5af4fd8d246aef3986e"
+if __name__ == "__main__":
+    sub = ZimuxiaOnline()
+    search = sub.search_preview("最爱")
+    print(search)
+    uh = "4bcd33af9be2fba0060c388e984c7a2509e7e654"
     result = sub.search_result(uh)
     print(json.dumps(result, ensure_ascii=False))

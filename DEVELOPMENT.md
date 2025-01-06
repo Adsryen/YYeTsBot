@@ -1,25 +1,36 @@
 # 项目手册
 
 # 网站部署方式
+
 ## 一键脚本
-**仅支持AMD64，请先安装 docker、docker-compose和curl**
-### Linux/macOS： 
+
+**支持amd64/arm64，请先安装 docker、docker-compose和curl**
+
+**为了安全考虑，安装完成后程序将监听在 127.0.0.1 。如有需要请自行修改 `docker-compose.yml`的127.0.0.1为0.0.0.0**
+
+### Linux/macOS：
+
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/tgbot-collection/YYeTsBot/master/scripts/install.sh)"
 ````
+
 ### Windows
+
 请再安装一个 [git for windows](https://gitforwindows.org/)，然后桌面空白处右键，选择 `git bash here`
 再然后
+
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/tgbot-collection/YYeTsBot/master/scripts/install.sh)"
 ````
 
 ## docker-compose
+
 参考 `yyetsweb`目录下的 `README`
 
+# bot
 
-# bot 
 可以选择docker，也可以直接运行在机器上。
+
 ## docker-compose
 
 * 参见 [这里](https://github.com/tgbot-collection/BotsRunner)
@@ -34,10 +45,37 @@ docker-compose up -d mongo
 docker yyets_mongo.gz 1234da:/tmp
 # 进入容器
 docker-compose exec mongo bash
-mongorestore --gzip --archive=/tmp/yyets_mongo.gz
+mongorestore --gzip --archive=yyets_mongo.gz --nsFrom "share.*" --nsTo "zimuzu.*"
 exit
 # 开启服务
 docker-compose up -d
+```
+
+## replica set 配置方式
+
+```shell
+ln -s docker-compose-replica.yml docker-compose.override.yml
+docker-compose up -d mongo
+# 进入shell
+rs.initiate({
+    _id: "rs0",
+    members: [{
+        _id: 0,
+        host: "localhost:27017"
+    },
+    {
+        _id: 1,
+        host: "mongo2:27017"
+    }]
+})
+
+# 调整优先级
+cfg = rs.conf()
+cfg.members[0].priority = 0.5
+cfg.members[1].priority = 0.5
+cfg.members[2].priority = 1 # 最高
+rs.reconfig(cfg)
+
 ```
 
 ## 常规方式
@@ -82,14 +120,11 @@ python /path/to/YYeTsBot/yyetsbot/bot.py
 
 参考 `yyets.service`
 
-
-
 # 添加新的资源网站
 
 欢迎各位开发提交新的资源网站！方法非常简单，重写 `BaseFansub`，实现`search_preview`和`search_result`，按照约定的格式返回数据。
 
 然后把类名字添加到 `FANSUB_ORDER` 就可以了！是不是很简单！
-
 
 # 防爬
 
@@ -101,7 +136,6 @@ python /path/to/YYeTsBot/yyetsbot/bot.py
 
 404的访问会被计数，超过10次会被拉入黑名单，持续3600秒，再次访问会持续叠加。
 
-
 # 持续部署
 
 使用[Docker Hub Webhook](https://docs.docker.com/docker-hub/webhooks/)
@@ -110,15 +144,23 @@ python /path/to/YYeTsBot/yyetsbot/bot.py
 参考listener [Webhook listener](https://github.com/tgbot-collection/Webhook)
 
 # 归档资源下载
+
 ## Telegram 频道分享
-* 包含了2021年1月11日为止的人人影视最新资源，MySQL为主。有兴趣的盆友可以用这个数据进行二次开发[戳我查看详情](https://t.me/mikuri520/668)
+
+*
+
+包含了2021年1月11日为止的人人影视最新资源，MySQL为主。有兴趣的盆友可以用这个数据进行二次开发[戳我查看详情](https://t.me/mikuri520/668)
+
 * 字幕侠离线数据库 [从这里下载](https://t.me/mikuri520/715)，这个数据比较粗糙，并且字幕侠网站还在，因此不建议使用这个
 
 ## 本地下载
+
 如果无法访问Telegram，可以使用如下网址下载数据
-* [网站实时数据，MongoDB](https://yyets.dmesg.app/data/yyets_mongo.gz)
-* [MySQL](https://yyets.dmesg.app/data/yyets_mysql.zip)
-* [SQLite](https://yyets.dmesg.app/data/yyets_sqlite.zip)
+
+* [MongoDB](https://yyets.click/data/yyets_mongo.gz)
+* [MySQL](https://yyets.click/data/yyets_mysql.zip)
+* [SQLite](https://yyets.click/data/yyets_sqlite.zip)
 
 # API 文档
+
 参考 [API.md](API.md)
